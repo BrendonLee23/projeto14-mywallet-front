@@ -1,19 +1,19 @@
 import styled from "styled-components"
 
-export default function TransactionsPage() {
+export default function InsertTransactionsPage() {
   return (
-    <TransactionsContainer>
-      <h1>Nova TRANSAÇÃO</h1>
+    <Entrada>
+      <h1>Nova Entrada</h1>
       <form>
         <input placeholder="Valor" type="text"/>
         <input placeholder="Descrição" type="text" />
-        <button>Salvar TRANSAÇÃO</button>
+        <button>Salvar entrada</button>
       </form>
-    </TransactionsContainer>
+    </Entrada>
   )
 }
 
-const TransactionsContainer = styled.main`
+const Entrada = styled.main`
   height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;
