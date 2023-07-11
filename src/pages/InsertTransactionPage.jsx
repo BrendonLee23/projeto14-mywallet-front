@@ -49,10 +49,10 @@ console.log(user.token)
   return (
     <Entrada>
       <h1>Nova Entrada</h1>
-      <form>
+      <form onSubmit={adicionarEntrada} >
         <input required data-test="registry-amount-input" type={'text'} placeholder={'Valor'} value={valor} onChange={(e) => setValor(e.target.value)} />
         <input required  data-test="registry-name-input" type={'text'} placeholder={'Descrição'} value={descricao} onChange={(e) => setDescricao(e.target.value)} />
-        <button data-test="registry-save" onClick={adicionarEntrada}>Salvar entrada</button>
+        <button data-test="registry-save">Salvar entrada</button>
       </form>
     </Entrada>
   )
