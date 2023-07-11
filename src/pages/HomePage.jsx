@@ -49,7 +49,7 @@ export default function HomePage() {
   }
 
 
-    axios.get('http://localhost:5000/home', config)
+    axios.get(`${import.meta.env.VITE_API_URL}/home`, config)
       .then(res => {
         setTransacoes(res.data.listaFinal);
         setTotal(res.data.total)

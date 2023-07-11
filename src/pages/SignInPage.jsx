@@ -20,7 +20,7 @@ export default function SignInPage() {
     e.preventDefault();
 
     setLoading(true);
-    const promise = axios.post('http://localhost:5000/', {
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/`, {
       email: email,
       senha: senha
     });

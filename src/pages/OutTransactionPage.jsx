@@ -31,7 +31,7 @@ export default function OutTransactionsPage() {
             descricao: descricao
         }
 
-        const promise = axios.post('http://localhost:5000/nova-transacao/saida', body, config);
+        const promise = axios.post(`${import.meta.env.VITE_API_URL}/saida`, body, config);
 
         promise.then(response => {
             console.log(response.data);

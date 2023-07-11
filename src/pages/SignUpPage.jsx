@@ -26,7 +26,7 @@ export default function SignUpPage() {
     e.preventDefault();
 
     setLoading(true);
-    const promise = axios.post('http://localhost:5000/cadastro', {
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/cadastro`, {
       email: email,
       nome: nome,
       senha: senha,

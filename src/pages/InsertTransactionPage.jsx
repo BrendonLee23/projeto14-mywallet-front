@@ -30,7 +30,7 @@ console.log(user.token)
                   descricao: descricao
                 }
 
-    const promise = axios.post('http://localhost:5000/nova-transacao/entrada', body, config);
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/entrada`, body, config);
 
     promise.then(response => {
       console.log(response.data);
