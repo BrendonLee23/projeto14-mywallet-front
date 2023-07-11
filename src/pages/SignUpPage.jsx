@@ -51,13 +51,13 @@ export default function SignUpPage() {
 
   return (
     <SingUpContainer>
-      <form>
+      <form onSubmit={registerUser} >
         <MyWalletLogo />
         <input data-test="name" type={'text'} placeholder={'Nome'} value={nome} onChange={(e) => setNome(e.target.value)} />
         <input data-test="email" type={'email'} placeholder={'E-mail'} value={email} onChange={(e) => setEmail(e.target.value)} />
         <input data-test="password" type={'password'} placeholder={'Senha'} value={senha} onChange={(e) => setSenha(e.target.value)} />
         <input data-test="conf-password" type={'password'} placeholder={'Confirme a senha'} value={confirm} onChange={(e) => setConfirm(e.target.value)} />
-        <button data-test="sign-up-submit"  onClick={registerUser}>
+        <button data-test="sign-up-submit" >
           {loading ? (<div>Caregando...</div>) : (
             'CADASTRAR'
           )
