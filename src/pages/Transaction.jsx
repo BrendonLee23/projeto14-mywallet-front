@@ -8,7 +8,7 @@ export default function TransactionItem({transacao}) {
 
     return (
         <Transaction>
-            <div data-test="registry-name" >
+            <div>
                 <span>{transacao.registeredAt}</span>
                 <strong data-test="registry-name">{transacao.description}</strong>
             </div>

@@ -36,8 +36,8 @@ export default function HomePage() {
   useEffect(() => {
 
     if(!token){
-      alert("Faça o login!")
       navigate('/')
+      alert("Faça o login!")
       return
     }
 

@@ -9,7 +9,7 @@ export default function InsertTransactionsPage() {
   const [valor, setValor] = useState('');
   const [descricao, setDescricao] = useState('');
   const {user} = useContext(UserContext)
-  const usuarioLogado = localStorage.getItem('nome')
+/*   const usuarioLogado = localStorage.getItem('nome') */
   const token = localStorage.getItem('token')
 console.log(user.token)
 
