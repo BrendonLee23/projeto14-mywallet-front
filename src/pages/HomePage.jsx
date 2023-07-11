@@ -2,51 +2,92 @@ import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import TransactionItem from "./Transaction";
+import axios from "axios";
+import { UserContext } from "../contexts/UserContext";
 
 export default function HomePage() {
 
   const navigate = useNavigate();
+  const {user, setUser} = useContext(UserContext)
+  const usuarioLogado = localStorage.getItem('nome')
+  const token = localStorage.getItem('token')
 
-  const [existingTransactions, setExistingTransactions] = useState(false);
 
-  function deslogar(){
-    // localStorage.removeItem("token")
+
+/*   const [existingTransactions, setExistingTransactions] = useState(false); */
+  const [transacoes, setTransacoes] = useState([]);
+  const [total, setTotal] = useState(0)
+
+  function deslogar() {
+    localStorage.removeItem('nome')
+    localStorage.removeItem('token')
     navigate('/')
   }
+
+
+  function converterTotal(n){
+
+    return Math.abs(n).toFixed(2).replace(".", ",");
+  }
+
+
+  useEffect(() => {
+
+    if(!token){
+      alert("Faça o login!")
+      navigate('/')
+      return
+    }
+
+
+    const config = {
+      headers: {
+          "authorization": `Bearer ${token}`,
+      }
+  }
+
+
+    axios.get('http://localhost:5000/home', config)
+      .then(res => {
+        setTransacoes(res.data.listaTransacoes);
+        setTotal(res.data.total)
+        console.log(user)
+        console.log(res.data)
+      })
+      .catch(err => console.log(err.message))
+  }, [token])
+
 
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Kaxorro LOKO</h1>
+        <h1>Olá, {usuarioLogado}</h1>
         <BiExit onClick={deslogar} />
       </Header>
 
       <TransactionsContainer>
         <ul>
-          {!existingTransactions ? (<TranNull>Não há registros de<br /> entrada ou saída</TranNull>) : (
-
-            <Transaction>
-            <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
-            </div>
-            <Value color={"negativo"}>120,00</Value>
-          </Transaction>
+          {!transacoes ? (<TranNull>Não há registros de<br /> entrada ou saída</TranNull>) : (
+              <>
+                  {transacoes?.map((transacao, indice) =>  <TransactionItem key={indice} transacao={transacao}/> )}
+              </>
           )}
         </ul>
 
+        {!transacoes ? '' : 
         <article>
           <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
-        </article>
+          <Value color={total>= 0? "positivo" : "negativo"}>{converterTotal(total)}</Value>
+        </article>}
       </TransactionsContainer>
       <ButtonsContainer>
-        <button onClick={() => navigate('/nova-transacao/:entrada')}>
+        <button onClick={() => navigate('/nova-transacao/entrada')}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button onClick={() => navigate('/nova-transacao/:saida')}>
+        <button onClick={() => navigate('/nova-transacao/saida')}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>

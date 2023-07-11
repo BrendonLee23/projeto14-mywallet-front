@@ -1,8 +1,9 @@
 import MyWalletLogo from "../components/MyWalletLogo"
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import { UserContext } from "../contexts/UserContext";
 /* import LoadingSpin from 'react-loader-spinner'; */
 
 export default function SignInPage() {
@@ -10,6 +11,7 @@ export default function SignInPage() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [loading, setLoading] = useState(false);
+  const {user, setUser} = useContext(UserContext)
 
   const navigate = useNavigate();
 
@@ -25,11 +27,11 @@ export default function SignInPage() {
 
     promise.then(response => {
       setLoading(false);
-      const { data } = response;
-      console.log(data);
-      //localStorage.setItem('token, data.token')
-      /* setToken(data.token);
-      setUser(data); */
+      const {token, usuario} = response.data
+      console.log(response.data);
+      setUser({token, usuario})
+      localStorage.setItem('token', response.data.token)
+      localStorage.setItem('nome', response.data.usuario )
       navigate('/home');
     })
 
