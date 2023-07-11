@@ -24,6 +24,11 @@ export default function SignUpPage() {
   function registerUser(e) {
 
     e.preventDefault();
+    
+    if(senha !== confirm){
+      alert("Digite a mesma senha")
+      return
+    }
 
     setLoading(true);
     const promise = axios.post(`${import.meta.env.VITE_API_URL}/cadastro`, {
