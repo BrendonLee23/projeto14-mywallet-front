@@ -53,11 +53,11 @@ export default function SignUpPage() {
     <SingUpContainer>
       <form>
         <MyWalletLogo />
-        <input type={'text'} placeholder={'Nome'} value={nome} onChange={(e) => setNome(e.target.value)} />
-        <input type={'email'} placeholder={'E-mail'} value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type={'password'} placeholder={'Senha'} value={senha} onChange={(e) => setSenha(e.target.value)} />
-        <input type={'password'} placeholder={'Confirme a senha'} value={confirm} onChange={(e) => setConfirm(e.target.value)} />
-        <button onClick={registerUser}>
+        <input data-test="name" type={'text'} placeholder={'Nome'} value={nome} onChange={(e) => setNome(e.target.value)} />
+        <input data-test="email" type={'email'} placeholder={'E-mail'} value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input data-test="password" type={'password'} placeholder={'Senha'} value={senha} onChange={(e) => setSenha(e.target.value)} />
+        <input data-test="conf-password" type={'password'} placeholder={'Confirme a senha'} value={confirm} onChange={(e) => setConfirm(e.target.value)} />
+        <button data-test="sign-up-submit"  onClick={registerUser}>
           {loading ? (<div>Caregando...</div>) : (
             'CADASTRAR'
           )

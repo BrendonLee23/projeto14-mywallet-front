@@ -51,7 +51,7 @@ export default function HomePage() {
 
     axios.get('http://localhost:5000/home', config)
       .then(res => {
-        setTransacoes(res.data.listaTransacoes);
+        setTransacoes(res.data.listaFinal);
         setTotal(res.data.total)
         console.log(user)
         console.log(res.data)
@@ -63,8 +63,8 @@ export default function HomePage() {
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, {usuarioLogado}</h1>
-        <BiExit onClick={deslogar} />
+        <h1 data-test="user-name"  >Olá, {usuarioLogado}</h1>
+        <BiExit data-test="logout" onClick={deslogar} />
       </Header>
 
       <TransactionsContainer>
@@ -79,15 +79,15 @@ export default function HomePage() {
         {!transacoes ? '' : 
         <article>
           <strong>Saldo</strong>
-          <Value color={total>= 0? "positivo" : "negativo"}>{converterTotal(total)}</Value>
+          <Value data-test="total-amount"  color={total>= 0? "positivo" : "negativo"}>{converterTotal(total)}</Value>
         </article>}
       </TransactionsContainer>
       <ButtonsContainer>
-        <button onClick={() => navigate('/nova-transacao/entrada')}>
+        <button data-test="new-income" onClick={() => navigate('/nova-transacao/entrada')}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button onClick={() => navigate('/nova-transacao/saida')}>
+        <button data-test="new-expense" onClick={() => navigate('/nova-transacao/saida')}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>

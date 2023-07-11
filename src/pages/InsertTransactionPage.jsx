@@ -50,9 +50,9 @@ console.log(user.token)
     <Entrada>
       <h1>Nova Entrada</h1>
       <form>
-        <input type={'text'} placeholder={'Valor'} value={valor} onChange={(e) => setValor(e.target.value)} />
-        <input type={'text'} placeholder={'Descrição'} value={descricao} onChange={(e) => setDescricao(e.target.value)} />
-        <button onClick={adicionarEntrada}>Salvar entrada</button>
+        <input data-test="registry-amount-input" type={'text'} placeholder={'Valor'} value={valor} onChange={(e) => setValor(e.target.value)} />
+        <input data-test="registry-name-input" type={'text'} placeholder={'Descrição'} value={descricao} onChange={(e) => setDescricao(e.target.value)} />
+        <button data-test="registry-save" onClick={adicionarEntrada}>Salvar entrada</button>
       </form>
     </Entrada>
   )

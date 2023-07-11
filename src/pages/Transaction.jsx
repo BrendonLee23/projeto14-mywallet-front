@@ -8,12 +8,12 @@ export default function TransactionItem({transacao}) {
 
     return (
         <Transaction>
-            <div>
+            <div data-test="registry-name" >
                 <span>{transacao.registeredAt}</span>
-                <strong>{transacao.description}</strong>
+                <strong data-test="registry-name">{transacao.description}</strong>
             </div>
-            {transacao.type === "entrada" ? <Value color={"positivo"}>{transacao.value}</Value> :
-            <Value color={"negativo"}>{transacao.value}</Value>
+            {transacao.type === "entrada" ? <Value data-test="registry-amount" color={"positivo"}>{transacao.value}</Value> :
+            <Value data-test="registry-amount" color={"negativo"}>{transacao.value}</Value>
             }
             
         </Transaction>
