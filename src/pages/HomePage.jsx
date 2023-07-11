@@ -1,32 +1,39 @@
 import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function HomePage() {
+
+  const navigate = useNavigate();
+
+  const [existingTransactions, setExistingTransactions] = useState(false);
+
+  function deslogar(){
+    // localStorage.removeItem("token")
+    navigate('/')
+  }
+
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
-        <BiExit />
+        <h1>Olá, Kaxorro LOKO</h1>
+        <BiExit onClick={deslogar} />
       </Header>
 
       <TransactionsContainer>
         <ul>
-          <ListItemContainer>
+          {!existingTransactions ? (<TranNull>Não há registros de<br /> entrada ou saída</TranNull>) : (
+
+            <Transaction>
             <div>
               <span>30/11</span>
               <strong>Almoço mãe</strong>
             </div>
             <Value color={"negativo"}>120,00</Value>
-          </ListItemContainer>
-
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"positivo"}>3000,00</Value>
-          </ListItemContainer>
+          </Transaction>
+          )}
         </ul>
 
         <article>
@@ -34,19 +41,16 @@ export default function HomePage() {
           <Value color={"positivo"}>2880,00</Value>
         </article>
       </TransactionsContainer>
-
-
       <ButtonsContainer>
-        <button>
+        <button onClick={() => navigate('/nova-transacao/:entrada')}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button>
+        <button onClick={() => navigate('/nova-transacao/:saida')}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>
       </ButtonsContainer>
-
     </HomeContainer>
   )
 }
@@ -107,7 +111,7 @@ const Value = styled.div`
   text-align: right;
   color: ${(props) => (props.color === "positivo" ? "green" : "red")};
 `
-const ListItemContainer = styled.li`
+const Transaction = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -119,3 +123,12 @@ const ListItemContainer = styled.li`
     margin-right: 10px;
   }
 `
+const TranNull = styled.div`
+
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+    color: #868686;
+`
+  ;

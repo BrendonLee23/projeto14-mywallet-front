@@ -1,28 +1,32 @@
 import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
-import LoadingSpin from 'react-loader-spinner';
+/* import LoadingSpin from 'react-loader-spinner'; */
 import { useState } from "react";
 import axios from "axios";
 
 export default function SignUpPage() {
+
+
 
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [confirm, setConfirm] = useState('');
   const [loading, setLoading] = useState(false);
-
+  console.log(nome)
   const navigate = useNavigate();
 
   function refreshOnError() {
     window.location.reload(false);
   }
 
-  function registerUser() {
+  function registerUser(e) {
+
+    e.preventDefault();
 
     setLoading(true);
-    const promise = axios.post('localhost:5000/cadastro', {
+    const promise = axios.post('http://localhost:5000/cadastro', {
       email: email,
       nome: nome,
       senha: senha,
@@ -49,13 +53,12 @@ export default function SignUpPage() {
     <SingUpContainer>
       <form>
         <MyWalletLogo />
-        <input type={'text'} placeholder={'Nome'} value={nome} onChange={(e) => setName(e.target.value)} />
+        <input type={'text'} placeholder={'Nome'} value={nome} onChange={(e) => setNome(e.target.value)} />
         <input type={'email'} placeholder={'E-mail'} value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type={'password'} placeholder={'Senha'} value={senha} onChange={(e) => setPassword(e.target.value)} />
+        <input type={'password'} placeholder={'Senha'} value={senha} onChange={(e) => setSenha(e.target.value)} />
         <input type={'password'} placeholder={'Confirme a senha'} value={confirm} onChange={(e) => setConfirm(e.target.value)} />
-        <button>
-          {loading ? (<LoadingSpin primaryColor={'#FFFFFF'} secondaryColor={'transparent'} size={'35px'} width={8} />
-          ) : (
+        <button onClick={registerUser}>
+          {loading ? (<div>Caregando...</div>) : (
             'CADASTRAR'
           )
           }

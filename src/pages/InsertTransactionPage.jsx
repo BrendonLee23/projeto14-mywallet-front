@@ -1,6 +1,10 @@
 import styled from "styled-components"
 
 export default function InsertTransactionsPage() {
+
+  
+
+
   return (
     <Entrada>
       <h1>Nova Entrada</h1>
